@@ -34,3 +34,10 @@ Dependencies:
 Documentations:
 
 * http://develop.github.com/p/pulls.html
+* http://develop.github.com/p/commits.html
+
+* http://code.google.com/chrome/extensions/xhr.html
+* http://code.google.com/chrome/extensions/overview.html
+* http://code.google.com/chrome/extensions/tut_debugging.html
+* http://code.google.com/chrome/extensions/samples.html
+* http://code.google.com/chrome/extensions/faq.html#faq-dev-09

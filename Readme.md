@@ -15,6 +15,7 @@ Using v2 github api
 
 TODO:
 
+* Options page to set username*auth token, as well as user-repo 
 * Show github error messages about unsuccessfull pull-merge request
 * Filter out merged branches 
 * Show active pull requests

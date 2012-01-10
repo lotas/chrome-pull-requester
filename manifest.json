@@ -2,9 +2,9 @@
   "name": "Github Pull Request",
   "version": "1.0",
   "description": "Easily create new pull request",
+  "options_page": "options.html",
   "browser_action": {
     "default_icon": "icon.png",
-    "options_page": "options.html",
     "popup": "popup.html"
   },
   "permissions": [

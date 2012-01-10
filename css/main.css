@@ -1,0 +1,47 @@
+body {
+  min-width:680px;
+  min-height:420px;
+  overflow-x:hidden;
+}
+#username {color:#336699; font:bold 14px Tahoma;}
+#branches .sha {font: normal 13px Tahoma; color:#356;}
+
+.commit-info {font: normal 14px Tahoma; padding:2px 2px 2px 10px; margin: 4px; border:1px dotted #ccc; width:auto; line-height:16px;}
+
+.commit-info .committer {color:#369; padding-left:10px; }
+.commit-info .committed {color:#aaa;}
+.commit-info .title {color:#000; font-size:1.1em; font-weight:bold;}
+.commit-info a.commit{border-color: #D5DCDF; background: #F2F5F6; background: -webkit-gradient(linear,left top,left bottom,from(#F2F5F6),to(#E3EAED));background: height: 24px; padding: 3px 5px; line-height: 22px;font-size: 11px;color: #4E575B; text-shadow: rgba(0, 0, 0, 0.1) 1px 1px 1px; border: 1px solid #CEDEE5; -webkit-border-radius: 3px; border-radius: 3px; border-image: initial; float:right;}
+.commit-info a.commit span {padding-right: 10px; margin-right: -3px; display: inline-block;font-size: 13px; font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;}
+.commit-info a.commit:hover {border-color:#000;}
+
+#greet {float:right; margin:auto 20px;}
+
+ul#branches {padding:2px; margin:2px;}
+ul#branches li {list-style-type:none; float:left; display:inline-block; margin:2px 4px; border:1px solid #aaa;  padding: 3px 4px; color:#FFF; -webkit-border-radius:6px; text-shadow: 0 1px rgba(255, 255, 255, 0.5); background: -webkit-gradient(linear, left top, left bottom,from(#FFFFFF),to(#e3eaed));}
+ul#branches li a {font-size:1em !important; text-decoration:none; }
+
+ul#branches li.active,ul#branches li:hover {border:1px solid #000; text-shadow:none; background: -webkit-gradient(linear, left bottom, left top,from(#aaa),to(#FFF)); }
+ul#branches li.active a,ul#branches li.hover a {color:#000 !important; text-decoration:underline;}
+
+.commit-legend {display:none;}
+
+.controls {font:1.2em normal Tahoma; margin:4px 2px; margin-top:10px;}
+.controls #pullRequest {font-size:1.1em;}
+.controls .branch {border:1px dotted #ccc; padding:1px 2px; display:inline-block;background:#efcff0;font-weight:bold;}
+#pull-title {width:550px;}
+#pull-description {width:500px;}
+
+#pull-request-container {display:none;}
+
+
+#loader {display:none;}
+
+
+/* options page */
+#save-message {color:green; font:normal 16px Tahoma; display: none;}
+
+fieldset legend {font-size:2em; text-shadow: 2px 2px #DDDDDD;}
+fieldset label {display: inline-block; width:200px; font-weight:bold; color:#336699; font-size:1.1em;}
+fieldset input {width: 300px; padding:2px 2px;}
+button {font-size:1.3em;}

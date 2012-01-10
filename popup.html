@@ -1,47 +1,17 @@
-<script src="jquery.js" type="text/javascript"></script>
-<script src="github.js" type="text/javascript"></script>
-<style>
-body {
-  min-width:680px;
-  min-height:420px;
-  overflow-x:hidden;
-}
-#username {color:#336699; font:bold 14px Tahoma;}
-#branches .sha {font: normal 13px Tahoma; color:#356;}
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="includes/jquery.js" type="text/javascript"></script>
+    <script src="includes/github.js" type="text/javascript"></script>    
+    
+    <script src="js/settings.js"  charset="utf-8" type="text/javascript"></script>    
+</head>
+<body>
 
-.commit-info {font: normal 14px Tahoma; padding:2px 2px 2px 10px; margin: 4px; border:1px dotted #ccc; width:auto; line-height:16px;}
-
-.commit-info .committer {color:#369; padding-left:10px; }
-.commit-info .committed {color:#aaa;}
-.commit-info .title {color:#000; font-size:1.1em; font-weight:bold;}
-.commit-info a.commit{border-color: #D5DCDF; background: #F2F5F6; background: -webkit-gradient(linear,left top,left bottom,from(#F2F5F6),to(#E3EAED));background: height: 24px; padding: 3px 5px; line-height: 22px;font-size: 11px;color: #4E575B; text-shadow: rgba(0, 0, 0, 0.1) 1px 1px 1px; border: 1px solid #CEDEE5; -webkit-border-radius: 3px; border-radius: 3px; border-image: initial; float:right;}
-.commit-info a.commit span {padding-right: 10px; margin-right: -3px; display: inline-block;font-size: 13px; font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;}
-.commit-info a.commit:hover {border-color:#000;}
-
-#greet {float:right; margin:auto 20px;}
-
-ul#branches {padding:2px; margin:2px;}
-ul#branches li {list-style-type:none; float:left; display:inline-block; margin:2px 4px; border:1px solid #aaa;  padding: 3px 4px; color:#FFF; -webkit-border-radius:6px; text-shadow: 0 1px rgba(255, 255, 255, 0.5); background: -webkit-gradient(linear, left top, left bottom,from(#FFFFFF),to(#e3eaed));}
-ul#branches li a {font-size:1em !important; text-decoration:none; }
-
-ul#branches li.active,ul#branches li:hover {border:1px solid #000; text-shadow:none; background: -webkit-gradient(linear, left bottom, left top,from(#aaa),to(#FFF)); }
-ul#branches li.active a,ul#branches li.hover a {color:#000 !important; text-decoration:underline;}
-
-.commit-legend {display:none;}
-
-.controls {font:1.2em normal Tahoma; margin:4px 2px; margin-top:10px;}
-.controls #pullRequest {font-size:1.1em;}
-.controls .branch {border:1px dotted #ccc; padding:1px 2px; display:inline-block;background:#efcff0;font-weight:bold;}
-#pull-title {width:550px;}
-#pull-description {width:500px;}
-
-#pull-request-container {display:none;}
-</style>
-
-<div id="greet">Hello, <span id="username"></span></div>
+<div id="greet"><span id="username"></span></div>
 <h4>
     Branch to merge
-    <img border="0" src="loading.gif" id="loader" align="absmiddle">
+    <img border="0" src="img/loading.gif" id="loader" align="absmiddle">
 </h4>
 
 <div id="main-container">
@@ -64,95 +34,7 @@ ul#branches li.active a,ul#branches li.hover a {color:#000 !important; text-deco
 </div>
 <div id="pull-request-container">
 </div>
-<script>
+<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
 
-setTimeout(function(){
-  gh.authenticate("lotas", "5e5578748d99f0922df364aeb3a10e32");
-
-  var lotas = gh.user("lotas");
-  lotas.show(function (data) {
-      $('#username').text(data.user.name);
-  });
-
-  var mergeBranch = {title:'', sha:''};
-
-  var yangutu = gh.repo('yangutu', 'Yangutu');
-  yangutu.branches(function(data){
-
-        $('#loader').hide();
-
-        var elm = $('#branches'),
-            branches = [];
-
-        elm.text('');
-
-        for (var k  in data.branches) {
-            if (k == 'master') continue;
-            branches.push(k);
-        }
-
-        branches.sort();
-
-        for (var k in branches) {
-            var sha = data.branches[branches[k]],
-                sha10 = sha.substr(0, 10);
-            elm.append($('<li><a class="sha" href="#" rel="'+sha10+'">'+branches[k]+'</a></li>'));
-        }
-  });
-
-    $('#branches').on('click', 'a.sha', function(){
-        var elm = $(this),
-            commit = gh.commit('yangutu', 'Yangutu', elm.attr('rel'));
-
-        $('#branches li.active').removeClass('active');
-        elm.parents('li').addClass('active');
-
-        $('#loader').show();
-
-        mergeBranch.title = elm.text();
-        mergeBranch.sha = elm.attr('rel');
-        $('#pullRequest').attr('value', "Request "+mergeBranch.title+" → master");
-        $('#pull-title').val('Please merge branch "'+mergeBranch.title+'" into master');
-        $('#pull-description').focus();
-
-        commit.show(function(data){
-            $('#commit-info').html(formatCommit(data.commit));
-            $('.commit-legend').show();
-            $('#loader').hide();
-
-        });
-
-        return false;
-    });
-
-
-    $('#pullRequest').click(function(){
-        var pulls = gh.pulls('yangutu', 'Yangutu');
-        pulls.createRequest('master', mergeBranch.title, $('#pull-title').val(), $('#pull-description').val(), function(data){
-
-            $('#main-container').hide();
-            $('#pull-request-container').show();
-            
-            var str = '';
-            for(var k in data) {
-                str += k + ': ' + data[k]+"\n";
-            }
-            $('#pull-request-container').html('<pre>'+str+'</pre>');
-        });
-    });
-
-}, 100)
-
-
-function formatCommit(commit) 
-{
-    var html = '';
-    html += '<a target="_blank" class="commit" title="Open commit in new tab" href="https://github.com'+commit.url+'"><span>'+commit.id.substr(0,10) + ' &rarr;</span></a> ';
-    html += '<span class="title">&quot;'+commit.message+'&quot;</span> ';
-    html += '<br/>';
-    html += '<span class="committed">' + commit.committed_date.substr(0, 19).replace('T', ' ') + '</span>';
-    html += '<span class="committer">' + commit.committer.name +'</span> ';
-    return html;
-}
-
-</script>
+</body>
+</html>

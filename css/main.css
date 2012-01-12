@@ -1,5 +1,5 @@
 body {
-  min-width:680px;
+  min-width:540px;
   min-height:420px;
   overflow-x:hidden;
 }
@@ -18,19 +18,21 @@ body {
 #greet {float:right; margin:auto 20px;}
 
 ul#branches {padding:2px; margin:2px;}
-ul#branches li {list-style-type:none; float:left; display:inline-block; margin:2px 4px; border:1px solid #aaa;  padding: 3px 4px; color:#FFF; -webkit-border-radius:6px; text-shadow: 0 1px rgba(255, 255, 255, 0.5); background: -webkit-gradient(linear, left top, left bottom,from(#FFFFFF),to(#e3eaed));}
+ul#branches li {list-style-type:none;  margin:2px 4px; border:1px solid #aaa;  padding: 3px 4px; color:#FFF; -webkit-border-radius:6px; text-shadow: 0 1px rgba(255, 255, 255, 0.5); background: -webkit-gradient(linear, left top, left bottom,from(#FFFFFF),to(#e3eaed)); cursor:pointer;}
 ul#branches li a {font-size:1em !important; text-decoration:none; }
 
 ul#branches li.active,ul#branches li:hover {border:1px solid #000; text-shadow:none; background: -webkit-gradient(linear, left bottom, left top,from(#aaa),to(#FFF)); }
 ul#branches li.active a,ul#branches li.hover a {color:#000 !important; text-decoration:underline;}
+
+#branches li span.hash {float:right; display:inline-block; font-family:Monaco,"Courier New"; font-size:15px; color:#AAAAAA;}
 
 .commit-legend {display:none;}
 
 .controls {font:1.2em normal Tahoma; margin:4px 2px; margin-top:10px;}
 .controls #pullRequest {font-size:1.1em;}
 .controls .branch {border:1px dotted #ccc; padding:1px 2px; display:inline-block;background:#efcff0;font-weight:bold;}
-#pull-title {width:550px;}
-#pull-description {width:500px;}
+#pull-title {width:450px;}
+#pull-description {width:400px;}
 
 #pull-request-container {display:none;}
 
@@ -45,3 +47,30 @@ fieldset legend {font-size:2em; text-shadow: 2px 2px #DDDDDD;}
 fieldset label {display: inline-block; width:200px; font-weight:bold; color:#336699; font-size:1.1em;}
 fieldset input {width: 300px; padding:2px 2px;}
 button {font-size:1.3em;}
+
+h4 a {text-decoration:none; font-size:1.2em; color:#334455; font-family:Monaco, "Courier New";}
+h4 a.act, h4 a:hover {border-bottom:1px dashed #ccc; color:#443322}
+
+
+.tab-container {padding:1px 2px; margin:2px;}
+
+/* pull-requests */
+.pull-request {padding: 2px; margin:2px 10px 2px 0; border:1px dotted green;}
+.pull-request .title {font-weight:bold;}
+.pull-request .base {font-family:Monaco,"Courier New";}
+.pull-request span {margin-right:4px;}
+
+.pull-request .head {
+	width: auto; float:right;
+	height:19px;
+	padding: 2px 5px;
+	line-height: 19px;
+	font-family: Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;
+	font-size: 12px;
+	font-weight: normal;
+	color: white;
+	text-shadow: -1px -1px 0 black;
+	text-decoration: none;
+	background: -webkit-gradient(linear, left top, left bottom, from(#333),to(#777));
+	-webkit-border-radius: 4px;
+}

@@ -22,46 +22,21 @@ if (cache.test('username')) {
 
 var mergeBranch = {title:'', sha:''};
 
-var branches = {},
-    cacheKeyBranches = Settings.defaultUser + ':' + Settings.defaultRepository + ':branches';
 
-if (cache.test(cacheKeyBranches)) {
-    branches = cache.load(cacheKeyBranches);
-    UI.drawBranches(branches, $('#branches'));
 
-} else {
-    var repository = gh.repo(Settings.defaultUser, Settings.defaultRepository);
-    UI.startLoading();
-    repository.branches(function(data){
-        UI.stopLoading();
-
-        var branchNames = [];
-
-        for (var k  in data.branches) {
-            if (k == 'master') continue;
-            branchNames.push(k);
-        }
-
-        branchNames.sort();
-
-        var obj = {names: branchNames, commits: data.branches};
-        cache.save(cacheKeyBranches, obj);
-
-        UI.drawBranches(obj, $('#branches'));
-    });
-}
-
-$('#branches').on('click', 'a.sha', function(){
+$('#branches').on('click', 'li', function(){
     var elm = $(this),
-        commit = gh.commit(Settings.defaultUser, Settings.defaultRepository, elm.attr('rel'));
+        a = elm.find('a'),
+        // asuming username/Yangutu as forks
+        commit = gh.commit(Settings.githubUser, Settings.defaultRepository, a.attr('rel'));
 
     $('#branches li.active').removeClass('active');
-    elm.parents('li').addClass('active');
+    elm.addClass('active');
 
     UI.startLoading();
 
-    mergeBranch.title = elm.text();
-    mergeBranch.sha = elm.attr('rel');
+    mergeBranch.title = a.text();
+    mergeBranch.sha = a.attr('rel');
     $('#pullRequest').attr('value', "Request "+mergeBranch.title+" → master");
     $('#pull-title').val('Please merge branch "'+mergeBranch.title+'" into master');
     $('#pull-description').focus();
@@ -91,3 +66,24 @@ $('#pullRequest').click(function(){
     });
 });
 
+
+$('#tabs a').click(function(){
+    if ($(this).hasClass('act')) {
+        return;
+    }
+
+    //swap act class
+    $('#tabs a.act').removeClass('act');
+    $(this).addClass('act');
+
+    //swap tabs
+    $('.tab-container').hide()
+    var activeTabContainer = $('#tab-'+$(this).attr('rel')).show();
+
+    UI.tabContainerActive(activeTabContainer, $(this).attr('rel'));
+});
+
+setTimeout(function(){
+    //activate default tab on load
+    $('#tabs a[rel='+Settings.defaultTab+']').trigger('click');
+}, 100)

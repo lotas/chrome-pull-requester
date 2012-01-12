@@ -7,34 +7,43 @@
     <script src="js/settings.js"  charset="utf-8" type="text/javascript"></script>    
 </head>
 <body>
+    <div id="greet"><span id="username"></span></div>
+    <br clear="both"/>
+    <h4 id="tabs">
+        <a class="act" rel="branches" href="#">Your Branches</a> &nbsp;/&nbsp; <a rel="pulls" href="#">Active Pull Requests</a>    
+    </h4>
 
-<div id="greet"><span id="username"></span></div>
-<h4>
-    Branch to merge
-    <img border="0" src="img/loading.gif" id="loader" align="absmiddle">
-</h4>
+    <div id="tab-branches" class="tab-container">
+        <div id="main-container">
+            <ul id="branches" >
+            </ul>
+            <br clear="both">
+     
+            <br/>
+            <div class="commit-legend">Latest commit info:</div>
+            <div id="commit-info" class="commit-info"></div>
+            <div class="commit-legend controls">
+                <label>Title: <input type="text" id="pull-title" value="" /></label>
+                <br/>
+                <label>Description: <input type="text" id="pull-description" value="" /></label>
+                <br/>
+                <br/>
+                <input type="button" id="pullRequest" value="Make Pull Request" title="Hit to create new pull request" />
+                <br/><br/>
+            </div>
+        </div>
 
-<div id="main-container">
-    <ul id="branches" >
-    </ul>
-    <br clear="both">
 
-    <br/>
-    <div class="commit-legend">Latest commit info:</div>
-    <div id="commit-info" class="commit-info"></div>
-    <div class="commit-legend controls">
-        <label>Title: <input type="text" id="pull-title" value="" /></label>
-        <br/>
-        <label>Description: <input type="text" id="pull-description" value="" /></label>
-        <br/>
-        <br/>
-        <input type="button" id="pullRequest" value="Make Pull Request" title="Hit to create new pull request" />
-        <br/><br/>
+        <div id="pull-request-container">
+        </div>
     </div>
-</div>
-<div id="pull-request-container">
-</div>
-<script src="js/main.js" type="text/javascript" charset="utf-8"></script>
+    <div id="tab-pulls" class="tab-container">
+
+    </div>
+
+    <img border="0" src="img/loading.gif" id="loader" align="absmiddle">
+
+    <script src="js/main.js" type="text/javascript" charset="utf-8"></script>
 
 </body>
 </html>

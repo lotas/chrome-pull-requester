@@ -1,6 +1,3 @@
-//restore settings
-Utils.restoreSettings();
-
 if (Settings.githubUser == '' && Settings.githubToken == '') {
     UI.showNeedOptions();
     return false;

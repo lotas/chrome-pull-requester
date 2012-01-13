@@ -25,7 +25,9 @@ var Settings = {
 	defaultUser: '',
 	defaultRepository: '',
 
-	defaultTab: 'branches' // pulls|branches
+	defaultTab: 'branches', // pulls|branches
+
+	pollInterval: 60 //in seconds
 }
 
 
@@ -127,6 +129,18 @@ var UI = {
 			    });
 			}
 		}
+	},
+
+	/**
+	 * show notifications popup
+	 */
+	notify: function(title, text) {		
+		var notification = webkitNotifications.createNotification(
+		  'icon.png',  // icon url - can be relative
+		  title,  // notification title
+		  text  // notification body text
+		);
+		notification.show();
 	}
 };
 
@@ -167,7 +181,7 @@ var Utils = {
 	formatPull: function(pull) {
 		var html = '<div class="pull-request">';
         html += '<div class="head">'+pull.head.label+'</div>';
-		html += '<div class="title">#: '+pull.number+' <a tareg="_blank" href="'+pull.html_url+'">'+pull.title+'</a></div>';
+		html += '<div class="title">#: '+pull.number+' <a target="_blank" href="'+pull.html_url+'">'+pull.title+'</a></div>';
 		html += '<div class="body">'+pull.body+'</div>';
         html += '<span class="state">'+pull.state+'</span>'  ;
 		html += '<span class="comments">comments: '+pull.comments+'</span> ';
@@ -179,3 +193,7 @@ var Utils = {
 	}
 
 }
+
+
+//restore settings
+Utils.restoreSettings();

@@ -3,12 +3,14 @@
   "version": "1.0",
   "description": "Easily create new pull request",
   "options_page": "options.html",
+  "background_page": "background.html",
   "browser_action": {
     "default_icon": "icon.png",
     "popup": "popup.html"
   },
   "permissions": [
       "http://api.github.com/",
-    	"https://github.com/"
+    	"https://github.com/",
+      "notifications"
   ]
 }

@@ -1,0 +1,42 @@
+<script src="includes/github.js" type="text/javascript"></script>
+<script src="js/settings.js"  charset="utf-8" type="text/javascript"></script>    
+<script type="text/javascript">
+
+//periodically checking for new pull requests
+var lastShownPull = 0;
+
+chrome.browserAction.setBadgeText({text:'.'})
+
+gh.authenticate(Settings.githubUser, Settings.githubToken);
+
+checkPullRequests();
+
+function checkPullRequests(){
+
+	gh.pulls(Settings.defaultUser, Settings.defaultRepository).allPulls(function (data) {
+        chrome.browserAction.setBadgeText({text: ''+data.pulls.length});
+
+        setTimeout(checkPullRequests, Settings.pollInterval * 1000);
+
+        //notify if something's interesting or new
+
+        var maxShown = lastShownPull;
+        data.pulls.forEach(function(pull){
+        	if (pull.number > lastShownPull) {
+        		UI.notify(
+	        		'#'+pull.number+' '+pull.title, 
+	        		'From '+pull.head.label
+	        	);
+
+        		if (pull.number > maxShown) {
+	        		maxShown = pull.number;
+	        	}
+        	}
+        });
+
+        lastShownPull = maxShown;
+    });
+}
+
+
+</script>

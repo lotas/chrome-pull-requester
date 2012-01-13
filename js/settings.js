@@ -25,7 +25,7 @@ var Settings = {
 	defaultUser: '',
 	defaultRepository: '',
 
-	defaultTab: 'pulls'
+	defaultTab: 'branches' // pulls|branches
 }
 
 
@@ -91,7 +91,7 @@ var UI = {
 			UI.startLoading();
 			container.html('');
 
-			gh.pulls(Settings.defaultUser, Settings.defaultRepository+'/closed').allPulls(function (data) {
+			gh.pulls(Settings.defaultUser, Settings.defaultRepository).allPulls(function (data) {
 	            data.pulls.forEach(function (pull) {
 	                container.append(Utils.formatPull(pull));
 	            });
@@ -146,7 +146,7 @@ var Utils = {
 	saveSettings: function() {
 		cache.save('settings', Settings);
 	},
-	
+
 	/**
 	 * @return html string
 	 */

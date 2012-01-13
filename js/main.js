@@ -38,7 +38,7 @@ $('#branches').on('click', 'li', function(){
     mergeBranch.title = a.text();
     mergeBranch.sha = a.attr('rel');
     $('#pullRequest').attr('value', "Request "+mergeBranch.title+" → master");
-    $('#pull-title').val('Please merge branch "'+mergeBranch.title+'" into master');
+    $('#pull-title').val('Please merge branch "'+Settings.githubUser+':'+mergeBranch.title+'" into master');
     $('#pull-description').focus();
 
     commit.show(function(data){
@@ -53,7 +53,7 @@ $('#branches').on('click', 'li', function(){
 
 $('#pullRequest').click(function(){
     var pulls = gh.pulls(Settings.defaultUser, Settings.defaultRepository);
-    pulls.createRequest('master', mergeBranch.title, $('#pull-title').val(), $('#pull-description').val(), function(data){
+    pulls.createRequest('master', Settings.githubUser+':'+mergeBranch.title, $('#pull-title').val(), $('#pull-description').val(), function(data){
 
         $('#main-container').hide();
         $('#pull-request-container').show();

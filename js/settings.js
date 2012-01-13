@@ -10,7 +10,7 @@ Cache.prototype.save = function(id, value) {
 }
 Cache.prototype.removeAll = function() {
 	for (var k in localStorage) {
-		localStorage[k] = '';
+		localStorage[k] = null;
 		delete localStorage[k];
 	}
 }
@@ -106,7 +106,7 @@ var UI = {
 			    UI.drawBranches(branches, $('#branches'));
 
 			} else {
-			    var repository = gh.repo(Settings.defaultUser, Settings.defaultRepository);
+			    var repository = gh.repo(Settings.githubUser, Settings.defaultRepository);
 			    UI.startLoading();
 			    repository.branches(function(data){
 			        UI.stopLoading();

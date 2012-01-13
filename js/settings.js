@@ -99,7 +99,7 @@ var UI = {
 	        });
 		} else if (name == 'branches') {
 			var branches = {},
-			    cacheKeyBranches = Settings.defaultUser + ':' + Settings.defaultRepository + ':branches';
+			    cacheKeyBranches = Settings.githubUser + ':' + Settings.defaultRepository + ':branches';
 
 			if (cache.test(cacheKeyBranches)) {
 			    branches = cache.load(cacheKeyBranches);

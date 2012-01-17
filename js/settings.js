@@ -134,12 +134,17 @@ var UI = {
 	/**
 	 * show notifications popup
 	 */
-	notify: function(title, text) {		
-		var notification = webkitNotifications.createNotification(
-		  'icon.png',  // icon url - can be relative
-		  title,  // notification title
-		  text  // notification body text
+	notify: function(title, text, url) {		
+		var notification = webkitNotifications.createHTMLNotification(
+			'pull-notification.html' +
+				'?t='+encodeURIComponent(title) +
+				'&d='+encodeURIComponent(text) + 
+				'&u='+encodeURIComponent(url)
 		);
+		  // 'icon.png',  // icon url - can be relative
+		  // title,  // notification title
+		  // text  // notification body text
+		//);
 		notification.show();
 	}
 };

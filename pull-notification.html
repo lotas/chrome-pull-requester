@@ -1,0 +1,32 @@
+<head>
+	<style>
+		#title { font-weight:bold;}
+		#link {}
+		#link:visited {color:#333;}
+	</style>
+</head>
+<body>
+<a href="#" id="link" target="_blank">
+	<div id="title"></div>
+</a>
+<div id="description"></div>
+
+<a href="#" id="link2" onclick="window.close()">Close</a>
+
+<script>
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)')
+                    .exec(window.location.search);
+
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+var title = getParameterByName('t'),
+	text = getParameterByName('d'),
+	url = getParameterByName('u');
+
+document.getElementById('link').href = url;
+document.getElementById('title').innerHTML = title;
+document.getElementById('description').innerHTML = text;
+</script>
+</body>

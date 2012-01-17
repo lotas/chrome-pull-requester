@@ -25,7 +25,8 @@ function checkPullRequests(){
         	if (pull.number > lastShownPull) {
         		UI.notify(
 	        		'#'+pull.number+' '+pull.title, 
-	        		'From '+pull.head.label
+	        		'From '+pull.head.label,
+                    pull.html_url
 	        	);
 
         		if (pull.number > maxShown) {
